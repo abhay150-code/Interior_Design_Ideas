@@ -14,24 +14,27 @@ body {
 header {
     background: url("https://plus.unsplash.com/premium_photo-1704744489984-871aca42e60c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTI5fHxob21lJTIwaW50ZXJpb3J8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=900") no-repeat center/cover;
     height: 90vh;
-    display: flex;
+    display: flex; /* Uses Flex  */
     flex-direction: column;
     justify-content: space-between;
     padding-bottom: 80px;
+    min-height: 500px; /* Added min-height for very short screens */
 }
 
 .navbar {
     width: 100%;
     padding: 20px 60px;
-    display: flex;
+    display: flex; /* Uses Flex  */
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap; /* NEW: Allows items to wrap on small screens  */
+    gap: 15px; /* Adds spacing when items wrap */
 }
 
 .logo {
     font-size: 26px;
     font-weight: 700;
-    color: white
+    color: white;
 }
 
 .logo span {
@@ -39,9 +42,10 @@ header {
 }
 
 .nav-links {
-    display: flex;
+    display: flex; /* Uses Flex  */
     gap: 25px;
-    /* color: #eb6c28; */
+    flex-wrap: wrap; /* NEW: Allows links to wrap  */
+    justify-content: center; /* Center links when they wrap */
 }
 
 .nav-links li {
@@ -58,9 +62,6 @@ header {
     padding: 10px 20px;
     border: none;
     text-decoration: none;
-    
-
-
 }
 
 .nav-links a:hover {
@@ -69,9 +70,9 @@ header {
 }
 
 .btn {
-    padding: 10px 20px;
+    padding: 10px 20px; /* Uses Box Model [cite: 25] */
     border: none;
-    background-color: #eb6c28;
+    background-color: #eb6c28; /* Uses Colors [cite: 23] */
     color: #fff;
     font-size: 15px;
     cursor: pointer;
@@ -89,37 +90,43 @@ header {
     text-align: center;
     margin-top: 120px;
     color: #2c2c2c9f;
-    
+    padding: 0 20px; /* Add padding for small screens */
 }
 
 .hero h1 {
     font-size: 48px;
     max-width: 700px;
-    margin: auto;
+    margin: auto; /* Uses Box Model [cite: 25] */
     font-weight: 700;
     color: #eb6c28;
     align-items: center;
     margin-bottom: 0px;
-    transform: translateY(-400px); 
+    transform: translateY(0); /* Fixed: Was -400px */
 }
-.hero h1 span{
+
+.hero h1 span {
     color: white;
-
 }
-
 
 .hero-btn {
     margin-top: 10px;
     text-decoration: none;
-
+    display: inline-block;
 }
 
 /* ABOUT */
 .about {
-    display: flex;
+    display: flex; /* Uses Flex  */
     align-items: center;
     padding: 80px 60px;
     gap: 50px;
+    flex-wrap: wrap; /* NEW: Allows text/image to stack  */
+    justify-content: center; /* Center items when wrapped */
+}
+
+.about-text {
+    flex: 1; /* Allows growing */
+    min-width: 300px; /* NEW: Causes wrapping on screens < ~650px */
 }
 
 .about-text h2 {
@@ -134,9 +141,18 @@ header {
     margin-bottom: 20px;
 }
 
+.about-img {
+    flex: 1; /* Allows growing */
+    min-width: 300px; /* NEW: Causes wrapping */
+    text-align: center; /* Center image */
+}
+
 .about-img img {
-    width: 450px;
+    width: 100%; /* NEW: Makes image fluid */
+    max-width: 450px; /* Keeps original max size */
     border-radius: 10px;
+    display: block;
+    margin: 0 auto; /* Ensures centering */
 }
 
 /* SERVICES */
@@ -152,8 +168,9 @@ header {
 }
 
 .service-cards {
-    display: flex;
-    justify-content: space-between;
+    display: grid; /* Using CSS Grid  */
+    /* NEW: This is the fluid responsive part  */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
 }
 
@@ -161,9 +178,10 @@ header {
     background: #fff;
     border-radius: 10px;
     padding: 15px;
-    width: 32%;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease-out;   
+    /* Width is now controlled by grid */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-out;
+    text-align: left; /* Aligns text left inside card */
 }
 
 .card img {
@@ -171,8 +189,9 @@ header {
     border-radius: 8px;
     margin-bottom: 15px;
 }
-.card:hover{
-    transform: scale(1.1);
+
+.card:hover {
+    transform: scale(1.05);
 }
 
 .card h3 {
